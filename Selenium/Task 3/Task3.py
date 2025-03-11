@@ -8,20 +8,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import UnexpectedAlertPresentException
 
-# Define base directories and file paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Data files are located in the project root (adjust if you use a "TestData" folder)
 DATA_DIR = BASE_DIR  
 CONFIG_FILE = os.path.join(BASE_DIR, "Config", "UserCredentials.json")
 
-# Paths to geckodriver and Firefox (verify with "which geckodriver" and "which firefox")
 GECKODRIVER_PATH = "/usr/bin/geckodriver"
 FIREFOX_BINARY = "/usr/bin/firefox"
 
 def get_firefox_options():
     options = Options()
-    options.headless = True  # Run in headless mode
-    options.binary_location = FIREFOX_BINARY  # Explicit path to Firefox binary
+    options.headless = True  
+    options.binary_location = FIREFOX_BINARY  
     return options
 
 # -------------------- Page Objects --------------------
@@ -157,7 +154,7 @@ class GlobalUserSetupTest(unittest.TestCase):
         loginPage = homePage.go_to_login_page()
         registerPage = loginPage.go_to_register_page()
         randomEmail = f"{uuid.uuid4().hex[:16]}@gmail.com"
-        credentials = registerPage.register_user("Antanas", "Bosas", randomEmail, "ComplexPassword123*", "ComplexPassword123*")
+        credentials = registerPage.register_user("Test", "User", randomEmail, "T3stP4ssw*rd", "T3stP4ssw*rd")
         save_credentials(credentials)
         print(f"Registered new user: {randomEmail}")
 

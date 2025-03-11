@@ -1,31 +1,20 @@
 pipeline {
     agent any
     triggers {
-        cron('32 2 * * *') // Run every day at 2:32 AM
-    }
-    environment {
-        PROJECT_DIR = "/home/ovidijus_st/UniProjects/Testing/Selenium/Task3"
+        // Cron trigger: run every day at 2:00 AM.
+        cron('0 2 * * *')
     }
     stages {
         stage('Checkout Code') {
             steps {
-                sh '''
-                if [ ! -d "$PROJECT_DIR/.git" ]; then
-                    echo "Repository not found at $PROJECT_DIR"
-                    exit 1
-                else
-                    cd $PROJECT_DIR
-                    git pull origin main
-                fi
-                '''
+                // Check out the code from your Git repository.
+                checkout scm
             }
         }
         stage('Run Tests') {
             steps {
-                sh '''
-                cd $PROJECT_DIR
-                xvfb-run --auto-servernum python3 run_tests.py
-                '''
+                // Run your tests (adjust the command if your test runner file is named differently)
+                sh 'python3 run_tests.py'
             }
         }
     }
