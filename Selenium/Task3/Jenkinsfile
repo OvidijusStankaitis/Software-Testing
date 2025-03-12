@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-                sh 'cd Selenium/Task3 && xvfb-run --auto-servernum python3 Task3.py'
+                sh 'cd Selenium/Task3 && xvfb-run --auto-servernum python3 Task3.py -v'
             }
         }
     }
