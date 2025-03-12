@@ -1,20 +1,15 @@
 pipeline {
     agent any
-    triggers {
-        // Cron trigger: run every day at 2:00 AM.
-        cron('0 2 * * *')
-    }
     stages {
         stage('Checkout Code') {
             steps {
-                // Check out the code from your Git repository.
                 checkout scm
             }
         }
         stage('Run Tests') {
             steps {
-                // Run your tests (adjust the command if your test runner file is named differently)
-                sh 'python3 run_tests.py'
+                // Change directory to "Selenium/Task 3" and run Task3.py
+                sh 'cd Selenium/Task3 && python3 Task3.py'
             }
         }
     }
